@@ -1,0 +1,62 @@
+<md-sidenav-layout class="my-layout">
+
+    <md-sidenav mode="side" opened="true" >
+        <md-toolbar>
+            <md-input class="demo-full-width" [(ngModel)]="name" placeholder="name" (keyup)="onKey($event)"></md-input>
+        </md-toolbar>
+        <md-list>
+            <md-list-item *ngFor="let client of clients | inputfilter: name"  (click)="onSelect(client)" [class.selected]="client === selectedClient">
+                <img src="{{client.general.avatar}}" md-list-avatar alt="{{client.general.firstName}}">
+                <h3 md-line>{{ client.general.firstName }} {{client.general.lastName}}</h3>
+                <h4 md-line>{{ client.job.title }}</h4>
+                <p md-line>{{ client.contact.phone }}</p>
+            </md-list-item>
+        </md-list>
+    </md-sidenav>
+
+    <md-card *ngIf="selectedClient" class="md2 md-card client-details">
+        <div class="row">
+            <div class="col-md-3">
+                <img md-card-lg-image src="{{selectedClient.general.avatar}}" class="card-media md-media-lg" alt="{{selectedClient.general.firstName}}" >
+            </div>
+            <div class="col-md-9    ">
+                <md-card-content>
+                    <md-card-title>
+                        {{selectedClient.general.firstName}} {{selectedClient.general.lastName}}
+                    </md-card-title>
+                    <md-card-subtitle>
+                        <h4>job: </h4>
+                        <p>company: {{selectedClient.job.company}}</p>
+                        <p>title: {{selectedClient.job.title}}</p>
+                    </md-card-subtitle>
+
+                    <md-card-subtitle>
+                        <h4>contact: </h4>
+                        <p>email: {{selectedClient.contact.email}}</p>
+                        <p>phone: {{selectedClient.contact.phone}}</p>
+                    </md-card-subtitle>
+
+                    <md-card-subtitle>
+                        <h4>address: </h4>
+                        <p>street: {{selectedClient.address.street}}</p>
+                        <p>city: {{selectedClient.address.city}}</p>
+                        <p>zipCode: {{selectedClient.address.zipCode}}</p>
+                        <p>country: {{selectedClient.address.country}}</p>
+                    </md-card-subtitle>
+                </md-card-content>
+            </div>
+        </div>
+    </md-card>
+
+</md-sidenav-layout>
+
+
+
+
+
+
+
+
+
+
+
